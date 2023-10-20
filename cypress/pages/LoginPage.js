@@ -1,7 +1,7 @@
 export class LoginPage {
     elements = {
-        emailInput: () => cy.get("#inputEmail1"),
-        passwordInput: () => cy.get("#inputPassword2"),
+        emailInput: () => cy.get("#input-email"),
+        passwordInput: () => cy.get("#input-password"),
         loginButton: () => cy.contains("Log In")
     }
 
