@@ -1,8 +1,12 @@
 /// <reference types="cypress" />
-import { RegisterPage } from "../pages/RegisterPage";
+import { NavMenuComponent } from "../pages/components/NavToMenuBar";
 
 describe("Register Page Validation", () => {
-    const registerPage = new RegisterPage();
+    const menuItem = new NavMenuComponent();
+    beforeEach(() => {
+        cy.visit("/");
+        menuItem.openAuthTab();
+    });
 
     const elementsToClick = [
         'clickFieldName',
@@ -33,12 +37,9 @@ describe("Register Page Validation", () => {
         'password123',
         'password123'
       ];
-  
-    beforeEach(() => {
-      cy.visit("/auth/register/");
-    });
 
     it("Fields validation checkup if invalid", () => {
+        const registerPage = menuItem.openRegisterTab();
 
         for (let i = 0; i < elementsToClick.length; i++) {
             registerPage[elementsToClick[i]]();
@@ -52,12 +53,14 @@ describe("Register Page Validation", () => {
     });
 
     it("Password validation checkup if less than 4 characters", () => {
+        const registerPage = menuItem.openRegisterTab();
         registerPage.enterName("Tes");
         registerPage.clickFieldEmail();
         cy.contains("Full name should contains from 4 to 50 characters").should("be.visible");
     });
     
     it("Successful Registration checkup", () => {
+        const registerPage = menuItem.openRegisterTab();
         for (let i = 0; i < elementsToEnter.length; i++) {
             registerPage[elementsToEnter[i]](i === 4 ? '' : `${textToFill[i]}`);
           }
