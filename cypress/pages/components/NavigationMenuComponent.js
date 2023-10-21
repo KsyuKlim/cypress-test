@@ -1,3 +1,5 @@
+import { LoginPage } from "../pages/LoginPage";
+
 // export class NavMenuComponent {
 //     elements = {
 //       menuItem: (menuTitleName) => cy.get(`[title='${menuTitleName}']`),
@@ -8,13 +10,14 @@
 //     }
 //   }
 
-export class NavSubMenuComponent {
 
-  elements = {
-      menuElement: (value) => cy.get(`[title='${value}']`)
+export class NavMenuComponent {
+    elements = {
+      menuLogin: () => cy.get("[title='Login']"),
+    };
+  
+    openMenuItemByValue() {
+      this.elements.menuLogin().click();
+      return new LoginPage();
+    }
   }
-
-  openSubMenuByValue(value) {
-      this.elements.menuElement(value).click();
-  }
-}
